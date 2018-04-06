@@ -16,7 +16,7 @@ Below is a link to the Django download page and also the pip install command.
 > 
 > pip install Django==2.0.4
 
-### Tes the Project
+### Test the Project
 
 To run the tests in this project install Selenium for Python.
 
