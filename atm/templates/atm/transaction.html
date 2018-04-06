@@ -1,0 +1,44 @@
+{% extends 'atm/base.html' %}
+
+{% block screen %}
+    <div class="container">
+        <div id="transaction_prompt" class="row justify-content-end" style="margin-top: -5.5%">
+            <h4>Selection transaction:</h4>
+        </div>
+        <div class="row justify-content-end" style="margin-top: 2%">
+            <h4>Balance ></h4>
+        </div>
+        <div class="row justify-content-end" style="margin-top: 2.5%">
+            <h4>Deposit ></h4>
+        </div>
+        <div class="row justify-content-end" style="margin-top: 2%">
+            <h4>Withdrawal ></h4>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {% load static %}
+    <script src="{% static 'js/ajax_setup.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#right2').click(function() {
+                window.location.href = 'balance/';
+            });
+
+            $('#right3').click(function() {
+                window.location.href = 'deposit/';
+            });
+
+            $('#right4').click(function() {
+                window.location.href = 'withdrawal/';
+            });
+
+            $('#cancel').click(function() {
+                alert('Please take your receipt and ATM card. Thank you.')
+                window.location.href = '../';
+            });
+        });
+    </script>
+{% endblock %}
+

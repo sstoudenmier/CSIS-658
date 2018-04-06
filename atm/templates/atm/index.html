@@ -1,0 +1,46 @@
+{% extends 'atm/base.html' %}
+
+{% block screen %}
+    <div id="welcome_prompt" class="container">
+        <div class="row justify-content-md-center"><h4>Welcome to</h4></div>
+        <div class="row justify-content-md-center"><h4>Rock Solid Federal Credit Union</h4></div>
+        <div class="row justify-content-md-center"><h4>Please insert your ATM card</h4></div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {% load static %}
+    <script src="{% static 'js/ajax_setup.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#enter').click(function() {
+                var id = $('#account_number').val();
+                var csrftoken = getCookie('csrftoken');
+                $.ajax({
+                    url : '',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken' : csrftoken
+                    },
+                    data : {
+                        'account_id': id
+                    },
+                    success: function(data, status) { 
+                        if (id == '') {
+                            return;
+                        }
+                        if (data == 'valid') {
+                            window.location.href = 'pin';
+                        } else if (data == 'invalid') {
+                            alert('Invalid ATM card. It will be retained.');
+                            document.getElementById('account_number').value = '';
+                        }
+                    },
+                    error: function() { alert('error'); }
+                });
+            });
+        });
+
+    </script>
+{% endblock %}
+

@@ -1,0 +1,127 @@
+{% extends 'atm/base.html' %}
+
+{% block screen %}
+    <div class="container">
+        <div class="row justify-content-md-center"><h4>Enter amount to withdrawal.</h4></div>
+        <div class="row justify-content-md-center"><h4>Withdrawal must be a multiple of 10.</h4></div>
+        <div class="row justify-content-md-center"><h4 id="amount">$0.00</h4></div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {% load static %}
+    <script src="{% static 'js/ajax_setup.js' %}"></script>    <script>
+        $(document).ready(function() {
+            var withdraw_amount = '';
+
+            $('#enter').click(function() {
+                var csrftoken = getCookie('csrftoken');
+                $.ajax({
+                    url : '',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    },
+                    data : {
+                        'withdraw_amount': withdraw_amount,
+                    },
+                    success: function(data, status) { 
+                        if (data == 'exceeded limit') {
+                            alert('Daily limit exceeded.')
+                            withdraw_amount = '';
+                            document.getElementById('amount').textContent = '$0.00';
+                        }
+                        else if (data == 'invalid none') {
+                            alert('No amount input for withdrawal.');
+                            withdraw_amount = '';
+                            document.getElementById('amount').textContent = '$0.00';
+                        }
+                        else if (data == 'invalid balance') {
+                            alert('Insufficient funds! Please enter a valid amount.');
+                            withdraw_amount = '';
+                            document.getElementById('amount').textContent = '$0.00';
+                        } else if (data == 'invalid amount') {
+                            alert('Machine can only dispense $10 notes. Please enter a valid amount.');
+                            withdraw_amount = '';
+                            document.getElementById('amount').textContent = '$0.00';
+                        } else {
+                            if ($('#dispenser').val() == '') {
+                                alert('Your balance is being updated. Please take cash from dispenser.');
+                                withdraw_amount = withdraw_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                document.getElementById('dispenser').value = '$' + withdraw_amount + '.00';
+                                document.getElementById('receipt').value = data;
+                                withdraw_amount = ''
+                                document.getElementById('amount').textContent = '$0.00';
+                            } else {
+                                alert('Temporarily unable to process withdrawals.');
+                                withdraw_amount = '';
+                                document.getElementById('amount').textContent = '$0.00';
+                            }
+                        }
+                    },
+                    error: function() { alert('error'); }
+                });
+            });
+
+            $('#clear').click(function() {
+                withdraw_amount = '';
+                document.getElementById('amount').textContent = '$0.00';
+              });
+
+            $('#cancel').click(function() {
+              window.location.href = '../'
+            });
+
+            $('#number1').click(function() {
+                withdraw_amount += '1';
+                document.getElementById('amount').textContent = '$' + (parseInt(withdraw_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number2').click(function() {
+                withdraw_amount += '2';
+                document.getElementById('amount').textContent = '$' + (parseInt(withdraw_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number3').click(function() {
+                withdraw_amount += '3';
+                document.getElementById('amount').textContent = '$' + (parseInt(withdraw_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number4').click(function() {
+                withdraw_amount += '4';
+                document.getElementById('amount').textContent = '$' + (parseInt(withdraw_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number5').click(function() {
+                withdraw_amount += '5';
+                document.getElementById('amount').textContent = '$' + (parseInt(withdraw_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number6').click(function() {
+                withdraw_amount += '6';
+                document.getElementById('amount').textContent = '$' + (parseInt(withdraw_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number7').click(function() {
+                withdraw_amount += '7';
+                document.getElementById('amount').textContent = '$' + (parseInt(withdraw_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number8').click(function() {
+                withdraw_amount += '8';
+                document.getElementById('amount').textContent = '$' + (parseInt(withdraw_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number9').click(function() {
+                withdraw_amount += '9';
+                document.getElementById('amount').textContent = '$' + (parseInt(withdraw_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number0').click(function() {
+                withdraw_amount += '0';
+                document.getElementById('amount').textContent = '$' + (parseInt(withdraw_amount)).toLocaleString() + '.00';
+            });
+        });
+    </script>
+{% endblock %}
+

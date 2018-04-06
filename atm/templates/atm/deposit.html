@@ -1,0 +1,120 @@
+{% extends 'atm/base.html' %}
+
+{% block screen %}
+    <div class="container">
+        <div class="row justify-content-md-center"><h4>Enter amount to deposit.</h4></div>
+        <div class="row justify-content-md-center"><h4 id="amount">$0.00</h4></div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {% load static %}
+    <script src="{% static 'js/ajax_setup.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            var deposit_amount = '';
+
+            $('#enter').click(function() {
+                var csrftoken = getCookie('csrftoken');
+                var inserted_amount = $('#deposit').val();
+                $.ajax({
+                    url : '',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    },
+                    data : {
+                        'inserted_amount' : inserted_amount,
+                        'deposit_amount': deposit_amount  
+                    },
+                    success: function(data, status) { 
+                        if (data == 'jammed') {
+                            alert('Temporarily unable to process deposits.')
+                        }
+                        else if (data == 'no deposit amount') {
+                            alert('No amount input for deposit.');
+                            deposit_amount = '';
+                            document.getElementById('amount').textContent = '$0.00';
+                            return;
+                        } else if (data == 'no inserted amount') {
+                            alert('No inserted amount for deposit.')
+                            return;
+                        } else if (data == 'insert deposit') {
+                            alert('Please insert deposit into deposit slot.');
+                        } else if (data == 'deposit and inserted mismatch') {
+                            alert('Deposit specified and deposit inserted do not equal.');
+                            return;
+                        } else {
+                            alert('Your new balance is being printed.');
+                            document.getElementById('deposit').value = ''
+                            document.getElementById('receipt').value = data;
+                            deposit_amount = ''
+                            document.getElementById('amount').textContent = '$0.00';
+                        }
+                    },
+                    error: function() { alert('error'); }
+                });
+            });
+
+            $('#clear').click(function() {
+                deposit_amount = '';
+                document.getElementById('amount').textContent = '$0.00';
+              });
+
+            $('#cancel').click(function() {
+              window.location.href = '../'
+            });
+
+            $('#number1').click(function() {
+                deposit_amount += '1';
+                document.getElementById('amount').textContent = '$' + (parseInt(deposit_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number2').click(function() {
+                deposit_amount += '2';
+                document.getElementById('amount').textContent = '$' + (parseInt(deposit_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number3').click(function() {
+                deposit_amount += '3';
+                document.getElementById('amount').textContent = '$' + (parseInt(deposit_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number4').click(function() {
+                deposit_amount += '4';
+                document.getElementById('amount').textContent = '$' + (parseInt(deposit_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number5').click(function() {
+                deposit_amount += '5';
+                document.getElementById('amount').textContent = '$' + (parseInt(deposit_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number6').click(function() {
+                deposit_amount += '6';
+                document.getElementById('amount').textContent = '$' + (parseInt(deposit_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number7').click(function() {
+                deposit_amount += '7';
+                document.getElementById('amount').textContent = '$' + (parseInt(deposit_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number8').click(function() {
+                deposit_amount += '8';
+                document.getElementById('amount').textContent = '$' + (parseInt(deposit_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number9').click(function() {
+                deposit_amount += '9';
+                document.getElementById('amount').textContent = '$' + (parseInt(deposit_amount)).toLocaleString() + '.00';
+            });
+
+            $('#number0').click(function() {
+                deposit_amount += '0';
+                document.getElementById('amount').textContent = '$' + (parseInt(deposit_amount)).toLocaleString() + '.00';
+            });
+        });
+    </script>
+{% endblock %}
+

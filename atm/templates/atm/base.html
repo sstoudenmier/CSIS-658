@@ -1,0 +1,160 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Simple ATM</title>
+    </head>
+    <body>
+        {% csrf_token %}
+        <div class="container">
+            <!--Top part of the screen with the main screen-->
+            <div class="row">
+                <div class="col">
+                    <div class="row justify-content-end" style="padding: 10px; padding-top: 30px">
+                        <button {{ left_button1_state }} id="left1" type="button" class="btn btn-secondary" style="width: 30px; height: 30px"></button>
+                    </div>
+                    <div class="row justify-content-end" style="padding: 10px">
+                        <button {{ left_button2_state }} id="left2" type="button" class="btn btn-secondary" style="width: 30px; height: 30px"></button>
+                   </div>
+                    <div class="row justify-content-end" style="padding: 10px">
+                        <button {{ left_button3_state }} id="left3" type="button" class="btn btn-secondary" style="width: 30px; height: 30px"></button>
+                    </div>
+                    <div class="row justify-content-end" style="padding: 10px">
+                        <button {{ left_button4_state }} id="left4" type="button" class="btn btn-secondary" style="width: 30px; height: 30px"></button>
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="jumbotron" style="height: 35%">
+                        {% block screen %}
+                        {% endblock %}
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row justify-content-start" style="padding: 10px; padding-top: 30px">
+                        <button {{ right_button1_state }} id="right1" type="button" class="btn btn-secondary" style="width: 30px; height: 30px"></button>
+                    </div>
+                    <div class="row justify-content-start" style="padding: 10px">
+                        <button {{ right_button2_state }} id="right2" type="button" class="btn btn-secondary" style="width: 30px; height: 30px"></button>
+                    </div>
+                    <div class="row justify-content-start" style="padding: 10px">
+                        <button {{ right_button3_state }} id="right3" type="button" class="btn btn-secondary" style="width: 30px; height: 30px"></button>
+                    </div>
+                    <div class="row justify-content-start" style="padding: 10px">
+                        <button {{ right_button4_state }} id="right4" type="button" class="btn btn-secondary" style="width: 30px; height: 30px"></button>
+                    </div>
+                </div>
+            </div>
+            <!--First row of the middle section-->
+            <div class="row">
+                <div class="col-4" style="padding-left: 13%">
+                    <h6 style="width: 100%; height: 35px">
+                            <input class="form-control" id="receipt" placeholder="Printed Receipt" style="width: 100%; height: 100%">
+                    </h6>
+                </div>
+                <div class="col-3">
+                    <div class="row justify-content-center">
+                        <div class="col-4" style="padding-left: 15%">
+                            <button {{ number_button_state }} id="number1" type="button" class="btn btn-secondary" style="width: 40px; height: 40px">1</button>
+                        </div>
+                        <div class="col-4" style="padding-left: 15%">
+                            <button {{ number_button_state }} id="number2" type="button" class="btn btn-secondary" style="width: 40px; height: 40px">2</button>
+                        </div>
+                        <div class="col-4" style="padding-left: 15%">
+                            <button {{ number_button_state }} id="number3" type="button" class="btn btn-secondary" style="width: 40px; height: 40px">3</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div style="width: 68%; height: 35px; padding-left: 10%">
+                        <input class="form-control" id="account_number" placeholder="Card Slot" style="width: 100%; height: 100%">
+                    </div>
+                </div>
+            </div>
+            <!--Second row of the middle section-->
+            <div class="row" style="padding-top: 3%">
+                <div class="col-4">
+                </div>
+                <div class="col-3">
+                    <div class="row justify-content-center">
+                        <div class="col-4" style="padding-left: 15%">
+                            <button {{ number_button_state }} id="number4" type="button" class="btn btn-secondary" style="width: 40px; height: 40px">4</button>
+                        </div>
+                        <div class="col-4" style="padding-left: 15%">
+                            <button {{ number_button_state }} id="number5" type="button" class="btn btn-secondary" style="width: 40px; height: 40px">5</button>
+                        </div>
+                        <div class="col-4" style="padding-left: 15%">
+                            <button {{ number_button_state }} id="number6" type="button" class="btn btn-secondary" style="width: 40px; height: 40px">6</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div style="padding-left: 35%">
+                        <button {{ enter_button_state }} id="enter" type="button" class="btn btn-secondary" style="width: 150px; height: 40px">Enter</button>
+                    </div>
+                </div>
+            </div>
+            <!--Third row of the middle section-->
+            <div class="row" style="padding-top: 3%">
+                <div class="col-4">
+                </div>
+                <div class="col-3">
+                    <div class="row justify-content-center">
+                        <div class="col-4" style="padding-left: 15%">
+                            <button {{ number_button_state }} id="number7" type="button" class="btn btn-secondary" style="width: 40px; height: 40px">7</button>
+                        </div>
+                        <div class="col-4" style="padding-left: 15%">
+                            <button {{ number_button_state }} id="number8" type="button" class="btn btn-secondary" style="width: 40px; height: 40px">8</button>
+                        </div>
+                        <div class="col-4" style="padding-left: 15%">
+                            <button {{ number_button_state }} id="number9" type="button" class="btn btn-secondary" style="width: 40px; height: 40px">9</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div style="padding-left: 35%">
+                        <button {{ clear_button_state }} id="clear" type="button" class="btn btn-secondary" style="width: 150px; height: 40px">Clear</button>
+                    </div>
+                </div>
+            </div>
+            <!--Fourth row of the middle section-->
+            <div class="row" style="padding-top: 3%">
+                <div class="col-4">
+                </div>
+                <div class="col-3">
+                    <div class="row justify-content-center">
+                        <div class="col-4" style="padding-left: 15%">
+                        </div>
+                        <div class="col-4" style="padding-left: 15%">
+                            <button {{ number_button_state }} id="number0" type="button" class="btn btn-secondary" style="width: 40px; height: 40px">0</button>
+                        </div>
+                        <div class="col-4" style="padding-left: 15%">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div style="padding-left: 35%">
+                        <button {{ cancel_button_state }} id="cancel" type="button" class="btn btn-secondary" style="width: 150px; height: 40px">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <!--Bottom row of the screen-->
+            <div class="row" style="padding-top: 3%">
+                <div class="col-6" style="padding-left: 13%">
+                    <h6 style="width: 100%; height: 35px">
+                        <input class="form-control" id="dispenser" placeholder="Cash Dispenser" style="width: 100%; height: 100%">
+                    </h6>
+                </div>
+                <div class="col-6" style="padding-left: 4%">
+                    <h6 style="width: 73%; height: 35px">
+                            <input class="form-control" id="deposit" placeholder="Deposit Slot" style="width: 100%; height: 100%">
+                    </h6>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        {% block javascript %}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,157 @@
+{% extends 'atm/base.html' %}
+
+{% block screen %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <h2>Please enter your PIN:</h2>
+        </div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-1"><h1 id="pin1">_</h1></div>
+            <div class="col-1"><h1 id="pin2">_</h1></div>
+            <div class="col-1"><h1 id="pin3">_</h1></div>
+            <div class="col-1"><h1 id="pin4">_</h1></div>
+            <div class="col-4"></div>
+            
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {% load static %}
+    <script src="{% static 'js/ajax_setup.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            var counter = 1;
+            var invalid_counter = 0;
+            var pin = '';
+            $('#enter').click(function() {
+                var csrftoken = getCookie('csrftoken');
+                $.ajax({
+                    url : '',
+                    type: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    },
+                    data : {
+                        'account_pin': pin,
+                    },
+                    success: function(data, status) { 
+                        if (data == 'valid') {
+                            window.location.href = '../transaction'; 
+                        }
+                        else if (data == 'invalid') {
+                            if (invalid_counter == 2) {
+                                window.location.href = '../';
+                            } else {
+                                alert('Invalid PIN. Try agin.');
+                                document.getElementById('pin1').textContent = '_';
+                                document.getElementById('pin2').textContent = '_';
+                                document.getElementById('pin3').textContent = '_';
+                                document.getElementById('pin4').textContent = '_';
+                                counter = 1;
+                                pin = '';
+                                invalid_counter++;
+                            }   
+                        }
+                    },
+                    error: function() { alert('error'); }
+                });
+            });
+
+            $('#clear').click(function() {
+                document.getElementById('pin1').textContent = '_';
+                document.getElementById('pin2').textContent = '_';
+                document.getElementById('pin3').textContent = '_';
+                document.getElementById('pin4').textContent = '_';
+                counter = 1;
+                pin = '';
+            });
+
+            $('#cancel').click(function() {
+                alert('Please take your receipt and ATM card. Thank you.');
+                window.location.href = '../';
+            });
+
+            $('#number1').click(function() {
+                if (counter !== 5) {
+                    document.getElementById('pin' + counter).textContent = 1;
+                    counter++;
+                    pin += '1';
+                }
+            })
+
+            $('#number2').click(function() {
+                if (counter !== 5) {
+                    document.getElementById('pin' + counter).textContent = 2;
+                    counter++;
+                    pin += '2';
+                }
+            })
+
+            $('#number3').click(function() {
+                if (counter !== 5) {
+                    document.getElementById('pin' + counter).textContent = 3;
+                    counter++;
+                    pin += '3';
+                }
+            })
+
+            $('#number4').click(function() {
+                if (counter !== 5) {
+                    document.getElementById('pin' + counter).textContent = 4;
+                    counter++;
+                    pin += '4';
+                }
+            })
+
+            $('#number5').click(function() {
+                if (counter !== 5) {
+                    document.getElementById('pin' + counter).textContent = 5;
+                    counter++;
+                    pin += '5';
+                }
+            })
+
+            $('#number6').click(function() {
+                if (counter !== 5) {
+                    document.getElementById('pin' + counter).textContent = 6;
+                    counter++;
+                    pin += '6';
+                }
+            })
+
+            $('#number7').click(function() {
+                if (counter !== 5) {
+                    document.getElementById('pin' + counter).textContent = 7;
+                    counter++;
+                    pin += '7';
+                }
+            })
+
+            $('#number8').click(function() {
+                if (counter !== 5) {
+                    document.getElementById('pin' + counter).textContent = 8;
+                    counter++;
+                    pin += '8';
+                }
+            })
+
+            $('#number9').click(function() {
+                if (counter !== 5) {
+                    document.getElementById('pin' + counter).textContent = 9;
+                    counter++;
+                    pin += '9';
+                }
+            })
+
+            $('#number0').click(function() {
+                if (counter !== 5) {
+                    document.getElementById('pin' + counter).textContent = 0;
+                    counter++;
+                    pin += '0';
+                }
+            })
+        });
+    </script>
+{% endblock %}
