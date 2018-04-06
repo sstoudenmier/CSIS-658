@@ -26,4 +26,16 @@ Below is a link to the Selenium download page and also the pip install command.
 > 
 > pip install selenium
 
+### View Code Coverage
+
+To view code coverage click into the cover directory and open index.html. 
+
+Code coverage is viewed with the use of django_nose.
+
+Below is a link to the django_nose download page and also the pip install command.
+
+> https://django-nose.readthedocs.io/en/latest/installation.html
+> 
+> pip install django_nose
+
 
