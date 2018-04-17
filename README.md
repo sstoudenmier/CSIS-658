@@ -16,6 +16,16 @@ Below is a link to the Django download page and also the pip install command.
 > 
 > pip install Django==2.0.4
 
+From here you move into the directory of the project at the location of manage.py.
+
+The command below will run the local server so that the application can be used:
+
+> python manage.py runserver
+
+Once the server is running the URL below will load the initial page:
+
+> http://localhost:8000/atm/
+
 ### Test the Project
 
 To run the tests in this project install Selenium for Python.
@@ -26,9 +36,17 @@ Below is a link to the Selenium download page and also the pip install command.
 > 
 > pip install selenium
 
+From here you move into the directory of the project at the location of manage.py.
+
+The command below will run all of the Selenium tests:
+
+> python manage.py test
+
 ### View Code Coverage
 
 To view code coverage click into the cover directory and open index.html. 
+
+The test coverage is generated after each run of the tests.
 
 Code coverage is viewed with the use of django_nose.
 
@@ -37,5 +55,7 @@ Below is a link to the django_nose download page and also the pip install comman
 > https://django-nose.readthedocs.io/en/latest/installation.html
 > 
 > pip install django_nose
+
+
 
 
