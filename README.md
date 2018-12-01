@@ -1,5 +1,4 @@
 # CSIS-658
-#### Sub
 
 
 This an implementation of the Simple ATM project in Paul C. Jorgensen's book ***Software Testing: A Craftsman's Approach***.
