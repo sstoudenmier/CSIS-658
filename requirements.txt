@@ -2,7 +2,7 @@ astroid==1.6.2
 certifi==2017.11.5
 chardet==3.0.4
 coverage==4.5.1
-Django==2.0
+Django==2.0.12
 django-money==0.12.3
 django-nose==1.4.5
 idna==2.6
